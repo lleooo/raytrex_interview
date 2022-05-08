@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="btnGroup">
+            <div id="die">
+                <input type="text" id="inputX" placeholder="實心格子X:">
+                <input type="text" id="inputY" placeholder="實心格子Y:">
+                <button id="btn2">創建實心格子</button>
+                <button id="clear">清空</button>
+            </div>
+            <div id="littleCircle">
+                <select id="select">
+                    <option value="top">上</option>
+                    <option value="bottom">下</option>
+                    <option value="left">左</option>
+                    <option value="right">右</option>
+                </select>
+                <button id="btn3">更新小圓位置</button>
+            </div>
+            <div id="quadrant">
+                <select id="quadrantX">
+                    <option value="normal">選擇X軸象限</option>
+                    <option value="normal">正常</option>
+                    <option value="reverse">反轉</option>
+                </select>
+                <select id="quadrantY">
+                    <option value="normal">選擇Y軸象限</option>
+                    <option value="normal">正常</option>
+                    <option value="reverse">反轉</option>
+                </select>
+                <button id="btn4">更新X,Y軸象限</button>
+            </div>
+            <div id="located">
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div id="canvasGroup">
+            <canvas id="wordY" width="15" height="500"></canvas>
+            <div id="show">
+                <canvas id="table" width="800" height="800"></canvas>
+                <canvas id="square" width="800" height="800"></canvas>
+                <canvas id="circle" width="500" height="500"></canvas>
+            </div>
+            <canvas id="wordX" width="500" height="15"></canvas>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="main.js"></script>
+
+</html>
