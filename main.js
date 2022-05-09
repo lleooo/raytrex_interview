@@ -1,3 +1,7 @@
+const oneGrid=50;
+const tableCanvas=800
+const squareCanvas=800
+const circleCanvas=500
 var btn2 = document.getElementById('btn2')
 var btn3 = document.getElementById('btn3')
 var btn4 = document.getElementById('btn4')
@@ -18,18 +22,18 @@ var clear = document.getElementById('clear').addEventListener('click', () => {
 function addTable() {
     var canvas = document.getElementById('table');
     var ctx = canvas.getContext('2d');
-    for (var i = 50; i < 800; i += 50) {
+    for (var i = oneGrid; i < tableCanvas; i += oneGrid) {
         ctx.setLineDash([5, 5.5]);
         ctx.moveTo(0, i);
-        ctx.lineTo(1500, i);
+        ctx.lineTo(tableCanvas, i);
         ctx.lineWidth = 1;
         ctx.strokeStyle = "gray";
         ctx.stroke();
     }
-    for (var i = 50; i < 800; i += 50) {
+    for (var i = oneGrid; i < tableCanvas; i += oneGrid) {
         ctx.setLineDash([5, 5.5]);
         ctx.moveTo(i, 0);
-        ctx.lineTo(i, 1500);
+        ctx.lineTo(i, tableCanvas);
         ctx.strokeStyle = "gray";
         ctx.stroke();
     }
@@ -42,8 +46,8 @@ function addSquare() {
     if (inputX == 0 || inputY == 0) {
         alert('請輸入XY值')
     } else {
-        for (var i = 0; i <= 800; i += inputX) {
-            for (var j = 0; j <= 800; j += inputY) {
+        for (var i = 0; i <= squareCanvas; i += inputX) {
+            for (var j = 0; j <= squareCanvas; j += inputY) {
                 var canvas = document.getElementById('square');
                 var ctx = canvas.getContext('2d');
                 ctx.moveTo(i, j);
@@ -62,12 +66,12 @@ function addCircle() {
     var canvas = document.getElementById('circle');
     var ctx = canvas.getContext('2d');
     ctx.beginPath();
-    ctx.arc(250, 250, 250, 0, 2 * Math.PI);
+    ctx.arc(circleCanvas/2, circleCanvas/2, 250, 0, 2 * Math.PI);
     ctx.fillStyle = "#d8d8d8";
     ctx.strokeStyle = "#d8d8d8";
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(250, 250, 235, 0, 2 * Math.PI);
+    ctx.arc(circleCanvas/2, circleCanvas/2, 235, 0, 2 * Math.PI);
     ctx.fillStyle = "#f1f1f1";
     ctx.fill();
     ctx.stroke();
@@ -103,26 +107,26 @@ function addWord() {
     ctx.clearRect(0, 0, c.width, c.height);
     cty.clearRect(0, 0, cy.width, cy.height);
     if (quadrantX == 'normal') {
-        let pos = 1
+        var pos = 1
         for (var i = -4; i < 5; i++) {
             ctx.fillText(i, 50 * pos, 10);
             pos++
         }
     } else {
-        let pos = 1
+        var pos = 1
         for (var i = 4; i > -5; i--) {
             ctx.fillText(i, 50 * pos, 10);
             pos++
         }
     }
     if (quadrantY == 'normal') {
-        let pos = 1
+        var pos = 1
         for (var i = 4; i > -5; i--) {
             cty.fillText(i, 5, 50 * pos);
             pos++
         }
     } else {
-        let pos = 1
+        var pos = 1
         for (var i = -4; i < 5; i++) {
             cty.fillText(i, 5, 50 * pos);
             pos++
