@@ -13,32 +13,28 @@
     <div id="container">
         <div id="btnGroup">
             <div id="die">
+                <label>輸入實心格子的XY值</label>
                 <input type="text" id="inputX" placeholder="實心格子X:">
                 <input type="text" id="inputY" placeholder="實心格子Y:">
-                <button id="btn2">創建實心格子</button>
-                <button id="clear">清空</button>
             </div>
             <div id="littleCircle">
+                <label>選擇缺角位置</label>
                 <select id="select">
                     <option value="top">上</option>
                     <option value="bottom">下</option>
                     <option value="left">左</option>
                     <option value="right">右</option>
                 </select>
-                <button id="btn3">更新小圓位置</button>
             </div>
             <div id="quadrant">
-                <select id="quadrantX">
-                    <option value="normal">選擇X軸象限</option>
-                    <option value="normal">正常</option>
-                    <option value="reverse">反轉</option>
+                <label>選擇要將原本第一象限更改為第幾象限</label>
+                <select id="chooseQuadrant">
+                    <option value="start">選擇象限</option>
+                    <option value="one">一</option>
+                    <option value="two">二</option>
+                    <option value="three">三</option>
+                    <option value="four">四</option>
                 </select>
-                <select id="quadrantY">
-                    <option value="normal">選擇Y軸象限</option>
-                    <option value="normal">正常</option>
-                    <option value="reverse">反轉</option>
-                </select>
-                <button id="btn4">更新X,Y軸象限</button>
             </div>
             <div id="located">
             </div>

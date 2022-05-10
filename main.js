@@ -1,23 +1,18 @@
-const oneGrid=50;
-const tableCanvas=800
-const squareCanvas=800
-const circleCanvas=500
-var btn2 = document.getElementById('btn2')
-var btn3 = document.getElementById('btn3')
-var btn4 = document.getElementById('btn4')
+const oneGrid = 50;
+const tableCanvas = 800
+const squareCanvas = 800
+const circleCanvas = 500
+var squareInputX = document.getElementById('inputX')
+var squareInputY = document.getElementById('inputY')
+var LittleCircleSelect = document.getElementById('select')
+var quadrantSelect = document.getElementById('chooseQuadrant')
 var located = document.getElementById('show');
-btn2.addEventListener('click', addSquare)
-btn3.addEventListener('click', addCircle)
-btn4.addEventListener('click', addWord)
+squareInputX.addEventListener('change', addSquare)
+squareInputY.addEventListener('change', addSquare)
+LittleCircleSelect.addEventListener('change', addCircle)
+quadrantSelect.addEventListener('change', addWord)
 located.addEventListener('mousemove', mouselocated)
 
-var clear = document.getElementById('clear').addEventListener('click', () => {
-    var canvas = document.getElementById('square');
-    document.getElementById('inputX').value = '';
-    document.getElementById('inputY').value = '';
-    var ctx = canvas.getContext('2d');
-    canvas.width = canvas.width
-})
 //創建方格
 function addTable() {
     var canvas = document.getElementById('table');
@@ -41,11 +36,18 @@ function addTable() {
 }
 //創建實心格子(Die)
 function addSquare() {
-    var inputX = document.getElementById('inputX').value * 50
-    var inputY = document.getElementById('inputY').value * 50
-    if (inputX == 0 || inputY == 0) {
-        alert('請輸入XY值')
-    } else {
+    var inputx = document.getElementById('inputX')
+    var inputX = inputx.value * oneGrid
+    var inputy = document.getElementById('inputY')
+    var inputY = inputy.value * oneGrid
+    if (inputX != 0 && inputY == 0) {
+        inputy.focus();
+    } else if (inputX == 0 && inputY != 0) {
+        inputx.focus();
+    } else if (inputX != 0 && inputY != 0) {
+        var canvas = document.getElementById('square');
+        var ctx = canvas.getContext('2d');
+        canvas.width = canvas.width
         for (var i = 0; i <= squareCanvas; i += inputX) {
             for (var j = 0; j <= squareCanvas; j += inputY) {
                 var canvas = document.getElementById('square');
@@ -66,16 +68,27 @@ function addCircle() {
     var canvas = document.getElementById('circle');
     var ctx = canvas.getContext('2d');
     ctx.beginPath();
-    ctx.arc(circleCanvas/2, circleCanvas/2, 250, 0, 2 * Math.PI);
+    ctx.arc(circleCanvas / 2, circleCanvas / 2, 250, 0, 2 * Math.PI);
     ctx.fillStyle = "#d8d8d8";
     ctx.strokeStyle = "#d8d8d8";
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(circleCanvas/2, circleCanvas/2, 235, 0, 2 * Math.PI);
+    ctx.arc(circleCanvas / 2, circleCanvas / 2, 235, 0, 2 * Math.PI);
     ctx.fillStyle = "#f1f1f1";
     ctx.fill();
     ctx.stroke();
-
+    //繪製紅十字
+    ctx.beginPath();
+    ctx.moveTo(circleCanvas / 2 - 5, circleCanvas / 2);
+    ctx.lineTo(circleCanvas / 2 + 5, circleCanvas / 2)
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+    ctx.moveTo(circleCanvas / 2, circleCanvas / 2 - 5);
+    ctx.lineTo(circleCanvas / 2, circleCanvas / 2 + 5)
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "red";
+    ctx.stroke();
 
     var selectItem = document.getElementById("select");
     var index = selectItem.selectedIndex;
@@ -96,40 +109,59 @@ function addCircle() {
 }
 //新增座標文字
 function addWord() {
-    var quadrantX = document.getElementById('quadrantX').value
-    var quadrantY = document.getElementById('quadrantY').value
+    var quadrant = document.getElementById('chooseQuadrant').value
     var c = document.getElementById("wordX");
-    var cy = document.getElementById('wordY')
+    var cy = document.getElementById("wordY");
     var ctx = c.getContext("2d");
     var cty = cy.getContext("2d");
     ctx.font = "50px";
     cty.font = "50px";
     ctx.clearRect(0, 0, c.width, c.height);
     cty.clearRect(0, 0, cy.width, cy.height);
-    if (quadrantX == 'normal') {
-        var pos = 1
+
+    if (quadrant == 'one' || quadrant == 'start') {
+        var posX = 1
+        var posY = 1
         for (var i = -4; i < 5; i++) {
-            ctx.fillText(i, 50 * pos, 10);
-            pos++
+            ctx.fillText(i, 50 * posX, 10);
+            posX++
         }
-    } else {
-        var pos = 1
         for (var i = 4; i > -5; i--) {
-            ctx.fillText(i, 50 * pos, 10);
-            pos++
+            cty.fillText(i, 3, 50 * posY);
+            posY++
         }
-    }
-    if (quadrantY == 'normal') {
-        var pos = 1
-        for (var i = 4; i > -5; i--) {
-            cty.fillText(i, 5, 50 * pos);
-            pos++
-        }
-    } else {
-        var pos = 1
+    } else if (quadrant == 'two') {
+        var posX = 1
+        var posY = 1
         for (var i = -4; i < 5; i++) {
-            cty.fillText(i, 5, 50 * pos);
-            pos++
+            ctx.fillText(i, 50 * posX, 10);
+            posX++
+        }
+        for (var i = -4; i < 5; i++) {
+            cty.fillText(i, 3, 50 * posY);
+            posY++
+        }
+    } else if (quadrant == 'three') {
+        var posX = 1
+        var posY = 1
+        for (var i = 4; i > -5; i--) {
+            ctx.fillText(i, 50 * posX, 10);
+            posX++
+        }
+        for (var i = -4; i < 5; i++) {
+            cty.fillText(i, 3, 50 * posY);
+            posY++
+        }
+    } else if (quadrant == 'four') {
+        var posX = 1
+        var posY = 1
+        for (var i = 4; i > -5; i--) {
+            ctx.fillText(i, 50 * posX, 10);
+            posX++
+        }
+        for (var i = 4; i > -5; i--) {
+            cty.fillText(i, 3, 50 * posY);
+            posY++
         }
     }
 }
@@ -146,19 +178,22 @@ function createLittleCircle(x, y) {
 }
 //滑鼠位置
 function mouselocated(e) {
+    //先取得目前象限
+    var quadrant = document.getElementById('chooseQuadrant').value
     var X, Y
-    var quadrantX = document.getElementById('quadrantX').value
-    var quadrantY = document.getElementById('quadrantY').value
     var x = e.offsetX;
     var y = e.offsetY;
-    if (quadrantX == 'reverse') {
-        X = (parseInt(x / 50) - 5) * -1
-    } else {
+    if (quadrant == 'one' || quadrant == 'start') {
         X = (parseInt(x / 50) - 5)
-    }
-    if (quadrantY == 'reverse') {
+        Y = (parseInt(y / 50) - 5) * -1
+    } else if (quadrant == 'two') {
+        X = (parseInt(x / 50) - 5)
         Y = (parseInt(y / 50) - 5)
-    } else {
+    } else if (quadrant == 'three') {
+        X = (parseInt(x / 50) - 5) * -1
+        Y = (parseInt(y / 50) - 5)
+    } else if (quadrant == 'four') {
+        X = (parseInt(x / 50) - 5) * -1
         Y = (parseInt(y / 50) - 5) * -1
     }
     var located = document.getElementById('located')
