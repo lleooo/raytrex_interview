@@ -133,11 +133,11 @@ function addWord() {
     } else if (quadrant == 'two') {
         var posX = 1
         var posY = 1
-        for (var i = -4; i < 5; i++) {
+        for (var i = 4; i > -5; i--) {
             ctx.fillText(i, 50 * posX, 10);
             posX++
         }
-        for (var i = -4; i < 5; i++) {
+        for (var i = 4; i > -5; i--) {
             cty.fillText(i, 3, 50 * posY);
             posY++
         }
@@ -155,11 +155,11 @@ function addWord() {
     } else if (quadrant == 'four') {
         var posX = 1
         var posY = 1
-        for (var i = 4; i > -5; i--) {
+        for (var i = -4; i < 5; i++) {
             ctx.fillText(i, 50 * posX, 10);
             posX++
         }
-        for (var i = 4; i > -5; i--) {
+        for (var i = -4; i < 5; i++) {
             cty.fillText(i, 3, 50 * posY);
             posY++
         }
@@ -187,14 +187,14 @@ function mouselocated(e) {
         X = (parseInt(x / 50) - 5)
         Y = (parseInt(y / 50) - 5) * -1
     } else if (quadrant == 'two') {
-        X = (parseInt(x / 50) - 5)
-        Y = (parseInt(y / 50) - 5)
+        X = (parseInt(x / 50) - 5)*-1
+        Y = (parseInt(y / 50) - 5)*-1
     } else if (quadrant == 'three') {
         X = (parseInt(x / 50) - 5) * -1
         Y = (parseInt(y / 50) - 5)
     } else if (quadrant == 'four') {
-        X = (parseInt(x / 50) - 5) * -1
-        Y = (parseInt(y / 50) - 5) * -1
+        X = (parseInt(x / 50) - 5) 
+        Y = (parseInt(y / 50) - 5) 
     }
     var located = document.getElementById('located')
     located.innerHTML = "滑鼠位置:[" + X.toString() + "," + Y.toString() + "]"
